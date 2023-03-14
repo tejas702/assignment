@@ -1,0 +1,15 @@
+server:
+  port: 6854
+
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:postgresql://containers-us-west-198.railway.app:6098/railway
+    username: postgres
+    password: xSSjZ6jvGA7iHzlIvzAo
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
