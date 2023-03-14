@@ -40,15 +40,13 @@ public class TaskService {
     }
 
     public String deleteTask(Integer taskId) {
-        boolean exception = false;
         try{
             taskRepository.deleteTaskById(taskId);
+            return SUCCESS;
         } catch (Exception e) {
-            exception = true;
             log.error("error deleting task with task id: " + taskId, e);
         }
-        if(exception) return FAILURE;
-        return SUCCESS;
+        return FAILURE;
     }
 
     public List<String> updateTask(UpdateTaskRequestDto updateTaskRequestDto) {
@@ -59,10 +57,11 @@ public class TaskService {
         TaskEntity task = TaskEntity.builder().taskid(taskId).userid(user).build();
         try{
             taskRepository.saveAndFlush(task);
+            return userService.getTasks(UserDto.builder().userId(userId).build());
         } catch(Exception e) {
             log.warn("error updating task with taskId " + taskId  + " and userId " + userId, e);
         }
-        return userService.getTasks(UserDto.builder().userId(userId).build());
+        return null;
     }
 
     public boolean isTaskPresent(Integer taskId) {
