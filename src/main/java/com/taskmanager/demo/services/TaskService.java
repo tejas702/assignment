@@ -39,12 +39,16 @@ public class TaskService {
         return userService.getTasks(UserDto.builder().userId(userId).build()); // return all tasks of the userId
     }
 
-    public void deleteTask(Integer taskId) {
+    public String deleteTask(Integer taskId) {
+        boolean exception = false;
         try{
             taskRepository.deleteTaskById(taskId);
         } catch (Exception e) {
+            exception = true;
             log.error("error deleting task with task id: " + taskId, e);
         }
+        if(exception) return FAILURE;
+        return SUCCESS;
     }
 
     public List<String> updateTask(UpdateTaskRequestDto updateTaskRequestDto) {

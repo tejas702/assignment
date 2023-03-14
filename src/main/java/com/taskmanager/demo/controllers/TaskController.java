@@ -21,8 +21,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteTask(@RequestBody TaskDto taskDto) {
-        taskService.deleteTask(taskDto.getTaskId());
+    public String deleteTask(@RequestBody TaskDto taskDto) {
+        return taskService.deleteTask(taskDto.getTaskId());
     }
 
     @PutMapping("/update")
