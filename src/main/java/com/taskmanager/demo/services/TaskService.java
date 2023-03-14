@@ -40,6 +40,7 @@ public class TaskService {
     }
 
     public String deleteTask(Integer taskId) {
+        if(!isTaskPresent(taskId)) return FAILURE;
         try{
             taskRepository.deleteTaskById(taskId);
             return SUCCESS;
