@@ -20,7 +20,7 @@ public class UserController {
         return userService.addUsers();
     }
 
-    @GetMapping("/get-tasks")
+    @PostMapping("/get-tasks")
     public List<String> getTasks(@RequestBody UserDto userDto) {
         return userService.getTasks(userDto);
     }
