@@ -1,15 +1,13 @@
 package com.taskmanager.demo.services;
 
-import com.taskmanager.demo.entities.TaskEntity;
+import com.taskmanager.demo.dtos.UserDto;
 import com.taskmanager.demo.entities.UserEntity;
 import com.taskmanager.demo.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -28,15 +26,17 @@ public class UserService {
         return user;
     }
 
-    public List<Integer> getTasks(Integer userId) {
+    public List<String> getTasks(UserDto userDto) {
+        Integer userId = userDto.getUserId();
         if(!isUserPresent(userId)) return null;
-        List<Integer> taskEntityList = null;
+        List<Integer> taskList = null;
         try{
-            taskEntityList = userRepository.getTasksList(userId);
+            taskList = userRepository.getTasksList(userId);
         } catch(Exception e) {
             log.warn("error fetching tasks list for userid: " + userId, e);
         }
-        return taskEntityList;
+        if(Objects.isNull(taskList)) return null;
+        return taskList.stream().map(Object::toString).toList();
     }
 
     public boolean isUserPresent(Integer userId) {

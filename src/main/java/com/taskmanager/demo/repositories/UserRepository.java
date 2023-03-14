@@ -1,6 +1,5 @@
 package com.taskmanager.demo.repositories;
 
-import com.taskmanager.demo.entities.TaskEntity;
 import com.taskmanager.demo.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
