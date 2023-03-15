@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin(allowedHeaders = {"*", "Content-Type", "token", "authorization", "content-type", "accept", "Content type"}, origins = "*", originPatterns = "*")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -20,7 +21,6 @@ public class UserController {
         return userService.addUsers();
     }
 
-    @CrossOrigin(allowedHeaders = {"*", "Content-Type", "token", "authorization", "content-type", "accept", "Content type"}, origins = "*", originPatterns = "*")
     @PostMapping("/get-tasks")
     public List<String> getTasks(@RequestBody UserDto userDto) {
         return userService.getTasks(userDto);
