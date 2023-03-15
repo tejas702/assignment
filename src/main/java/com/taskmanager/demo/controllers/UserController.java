@@ -20,6 +20,7 @@ public class UserController {
         return userService.addUsers();
     }
 
+    @CrossOrigin(allowedHeaders = {"*", "Content-Type", "token", "authorization", "content-type", "accept", "Content type"}, origins = "*", originPatterns = "*")
     @PostMapping("/get-tasks")
     public List<String> getTasks(@RequestBody UserDto userDto) {
         return userService.getTasks(userDto);
